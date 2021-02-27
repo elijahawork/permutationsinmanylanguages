@@ -11,15 +11,17 @@ void printVector(vector<T> vec) {
 
 // actual permutation function
 vector<string>* permute(string s) {
-    // if there are only two letters, then we know there are only two combinations
-    // AB and BA, where A and B represent the characters at position 1 and 2
-    if (s.size() == 2) {
-        vector<string> *permutations = new vector<string>(2);
-
-        // to the vector we add both of the two base permutations        
-        (*permutations)[0] = string(1,s[0])+s[1];
-        (*permutations)[1] = string(1,s[1]) + s[0];
-        // return the result
+    // if there are no characters, return an empty vector
+    if (s.size() == 0) {
+        return new vector<string>(0);
+    // if there is only one character, return that one character
+    // there is a choice to make the base case 2, and that would decrease the stack size
+    // during recursion but would also be more to type as there would be both a case for 1
+    // in the case that someone only passes one char, and one for two
+    // so the second one would be redunant
+    } else if (s.size() == 1) {
+        vector<string> *permutations = new vector<string>(1);
+        (*permutations)[0] = s;
         return permutations;
     } else {
         // there are an unknown amount of permutations
